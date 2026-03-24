@@ -9,7 +9,7 @@ exports.addExpense = async (req,res) => {
         const {icon, category, amount, date}  = req.body;
 
         //check krlo, if koi missing field hai toh error dedo
-        if(!category || !amount || !date){
+        if(!category || !amount ){
             return res.status(400).json({message: "All fields are required"});
         }
 
@@ -18,7 +18,7 @@ exports.addExpense = async (req,res) => {
             icon,
             category,
             amount,
-            date: new Date(date)
+            date: date ? new Date(date) : new Date() 
         });
 
         await newExpense.save();

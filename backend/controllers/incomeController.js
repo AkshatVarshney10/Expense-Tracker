@@ -9,7 +9,7 @@ exports.addIncome = async (req,res) => {
         const {icon, source, amount, date}  = req.body;
 
         //check krlo, if koi missing field hai toh error dedo
-        if(!source || !amount || !date){
+        if(!source || !amount){
             return res.status(400).json({message: "All fields are required"});
         }
 
@@ -18,7 +18,7 @@ exports.addIncome = async (req,res) => {
             icon,
             source,
             amount,
-            date: new Date(date)
+            date: date ? new Date(date) : new Date() 
         });
 
         await newIncome.save();
